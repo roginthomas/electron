@@ -572,16 +572,30 @@ describe('app module', () => {
       app.setLoginItemSettings({ openAtLogin: true, openAsHidden: true })
       // Wait because login item settings are not applied immediately in MAS build
       const delay = process.mas ? 250 : 0
-      setTimeout(() => {
-        expect(app.getLoginItemSettings()).to.deep.equal({
-          openAtLogin: true,
-          openAsHidden: process.platform === 'darwin' && !process.mas, // Only available on macOS
-          wasOpenedAtLogin: false,
-          wasOpenedAsHidden: false,
-          restoreState: false
-        })
-        done()
-      }, delay)
+
+      function checkCurrentSettings (done) {
+        const currentSettings = app.getLoginItemSettings()
+        if (currentSettings.openAtLogin !== true &&
+          currentSettings.openAsHidden !== (process.platform === 'darwin' && !process.mas) &&
+          currentSettings.wasOpenedAtLogin !== false &&
+          currentSettings.wasOpenedAsHidden !== false &&
+          currentSettings.restoreState !== false) {
+          console.log(`Settings do not match; waiting ${delay}ms to recheck`)
+          setTimeout(() => {
+            checkCurrentSettings(done)
+          }, delay)
+        } else {
+          expect(app.getLoginItemSettings()).to.deep.equal({
+            openAtLogin: true,
+            openAsHidden: process.platform === 'darwin' && !process.mas, // Only available on macOS
+            wasOpenedAtLogin: false,
+            wasOpenedAsHidden: false,
+            restoreState: false
+          })
+          done()
+        }
+      }
+      checkCurrentSettings(done)
     })
 
     it('correctly sets and unsets the LoginItem', function () {
