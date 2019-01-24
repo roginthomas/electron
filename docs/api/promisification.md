@@ -41,7 +41,6 @@ When a majority of affected functions are migrated, this flag will be enabled by
 - [ses.clearAuthCache(options[, callback])](https://github.com/electron/electron/blob/master/docs/api/session.md#clearAuthCache)
 - [contents.executeJavaScript(code[, userGesture, callback])](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#executeJavaScript)
 - [contents.hasServiceWorker(callback)](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#hasServiceWorker)
-- [contents.unregisterServiceWorker(callback)](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#unregisterServiceWorker)
 - [contents.print([options], [callback])](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#print)
 - [contents.printToPDF(options, callback)](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#printToPDF)
 - [contents.savePage(fullPath, saveType, callback)](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#savePage)
@@ -59,3 +58,4 @@ When a majority of affected functions are migrated, this flag will be enabled by
 - [shell.openExternal(url[, options, callback])](https://github.com/electron/electron/blob/master/docs/api/shell.md#openExternal)
 - [protocol.isProtocolHandled(scheme, callback)](https://github.com/electron/electron/blob/master/docs/api/protocol.md#isProtocolHandled)
 - [desktopCapturer.getSources(options, callback)](https://github.com/electron/electron/blob/master/docs/api/desktop-capturer.md#getSources)
+- [contents.unregisterServiceWorker(callback)](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#unregisterServiceWorker)

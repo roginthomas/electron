@@ -162,7 +162,7 @@ class WebContents : public mate::TrackableObject<WebContents>,
   void InspectElement(int x, int y);
   void InspectServiceWorker();
   void HasServiceWorker(const base::Callback<void(bool)>&);
-  void UnregisterServiceWorker(const base::Callback<void(bool)>&);
+  v8::Local<v8::Promise> UnregisterServiceWorker();
   void SetIgnoreMenuShortcuts(bool ignore);
   void SetAudioMuted(bool muted);
   bool IsAudioMuted();
