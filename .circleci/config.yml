@@ -445,6 +445,14 @@ step-maybe-trigger-arm-test: &step-maybe-trigger-arm-test
         echo "Triggering electron-$TARGET_ARCH-testing build on VSTS"
         node electron/script/ci-release-build.js --job=electron-$TARGET_ARCH-testing --ci=VSTS --armTest --circleBuildNum=$CIRCLE_BUILD_NUM $CIRCLE_BRANCH
       fi
+
+step-maybe-disable-auto-login: &step-maybe-disable-auto-login
+    command: |
+      if [ "`uname`" == "Darwin" ]; then
+        sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUser
+        sudo defaults delete /Library/Preferences/com.apple.loginwindow autoLoginUserScreenLocked
+      fi
+
 # Lists of steps.
 steps-checkout: &steps-checkout
   steps:
@@ -686,6 +694,7 @@ steps-tests: &steps-tests
     - *step-mksnapshot-unzip
     - *step-setup-linux-for-headless-testing
     - *step-install-nodejs-on-mac
+    - *step-maybe-disable-auto-login
 
     - run:
         name: Run Electron tests
@@ -983,6 +992,7 @@ jobs:
     environment:
       <<: *env-mac-large
       <<: *env-release-build
+      GCLIENT_EXTRA_ARGS: '--custom-var=checkout_boto=True --custom-var=checkout_requests=True'
     <<: *steps-electron-build-for-publish
 
   mas-testing:
@@ -1018,6 +1028,7 @@ jobs:
       <<: *env-mac-large
       <<: *env-mas
       <<: *env-release-build
+      GCLIENT_EXTRA_ARGS: '--custom-var=checkout_boto=True --custom-var=checkout_requests=True'
     <<: *steps-electron-build-for-publish
 
   # Layer 3: Tests.
