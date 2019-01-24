@@ -97,6 +97,9 @@ env-machine-mac: &env-machine-mac
 env-mac-large: &env-mac-large
   NUMBER_OF_NINJA_PROCESSES: 10
 
+env-disable-crash-reporter-tests: &env-disable-crash-reporter-tests
+  DISABLE_CRASH_REPORTER_TESTS: true
+
 # Individual (shared) steps.
 step-maybe-notify-slack-failure: &step-maybe-notify-slack-failure
   run:
@@ -1130,6 +1133,7 @@ jobs:
     environment:
       <<: *env-mac-large
       <<: *env-stack-dumping
+      <<: *env-disable-crash-reporter-tests
     <<: *steps-tests
 
   osx-release-tests:
@@ -1212,6 +1216,22 @@ jobs:
     <<: *machine-linux-medium
     environment:
       <<: *env-linux-medium
+      <<: *env-send-slack-notifications
+    steps:
+      - *step-maybe-notify-slack-success
+
+  mas-release-summary:
+    <<: *machine-mac
+    environment:
+      <<: *env-machine-mac
+      <<: *env-send-slack-notifications
+    steps:
+      - *step-maybe-notify-slack-success
+
+  osx-release-summary:
+    <<: *machine-mac
+    environment:
+      <<: *env-machine-mac
       <<: *env-send-slack-notifications
     steps:
       - *step-maybe-notify-slack-success

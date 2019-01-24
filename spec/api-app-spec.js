@@ -575,10 +575,10 @@ describe('app module', () => {
 
       function checkCurrentSettings (done) {
         const currentSettings = app.getLoginItemSettings()
-        if (currentSettings.openAtLogin !== true &&
-          currentSettings.openAsHidden !== (process.platform === 'darwin' && !process.mas) &&
-          currentSettings.wasOpenedAtLogin !== false &&
-          currentSettings.wasOpenedAsHidden !== false &&
+        if (currentSettings.openAtLogin !== true ||
+          currentSettings.openAsHidden !== (process.platform === 'darwin' && !process.mas) ||
+          currentSettings.wasOpenedAtLogin !== false ||
+          currentSettings.wasOpenedAsHidden !== false ||
           currentSettings.restoreState !== false) {
           console.log(`Settings do not match; waiting ${delay}ms to recheck`)
           setTimeout(() => {
