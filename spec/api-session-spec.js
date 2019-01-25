@@ -211,9 +211,7 @@ describe('session module', () => {
           value: 'bar'
         }, (error) => {
           if (error) return done(error)
-          session.defaultSession.cookies.flushStore(() => {
-            done()
-          })
+          session.defaultSession.cookies.flushStore(() => done())
         })
       })
     })
@@ -674,7 +672,7 @@ describe('session module', () => {
     })
   })
 
-  describe('ses.setCertificateVerifyProc(callback)', () => {
+  describe('ses.setCertificateVerifyProc(callback)', (done) => {
     let server = null
 
     beforeEach((done) => {
