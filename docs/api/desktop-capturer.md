@@ -87,11 +87,10 @@ The `desktopCapturer` module has the following methods:
     value is false. When false the appIcon property of the sources return null. Same if a source has
     the type screen.
 * `callback` Function
-  * `error` Error
   * `sources` [DesktopCapturerSource[]](structures/desktop-capturer-source.md)
 
 Starts gathering information about all available desktop media sources,
-and calls `callback(error, sources)` when finished.
+and calls `callback(sources)` when finished.
 
 `sources` is an array of [`DesktopCapturerSource`](structures/desktop-capturer-source.md)
 objects, each `DesktopCapturerSource` represents a screen or an individual window that can be
