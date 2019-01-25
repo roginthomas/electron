@@ -56,8 +56,10 @@ git clone https://github.com/electron/electron-quick-start
 cd electron-quick-start
 npm install
 npm start
-```
 
+Note:
+sudo apt-get install libgconf-2-4
+```
 ## Resources for learning Electron
 
 - [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
